@@ -1,20 +1,20 @@
-# Gemini CLI
+# Waylou ACE CLI
 
-[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
-[![Gemini CLI E2E (Chained)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/chained_e2e.yml)
-[![Version](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)
-[![License](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)
-[![View Code Wiki](https://assets.codewiki.google/readme-badge/static.svg)](https://codewiki.google/github.com/google-gemini/gemini-cli?utm_source=badge&utm_medium=github&utm_campaign=github.com/google-gemini/gemini-cli)
+[![Waylou ACE CLI CI](https://github.com/google-gemini/waylou-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/waylou-cli/actions/workflows/ci.yml)
+[![Waylou ACE CLI E2E (Chained)](https://github.com/google-gemini/waylou-cli/actions/workflows/chained_e2e.yml/badge.svg)](https://github.com/google-gemini/waylou-cli/actions/workflows/chained_e2e.yml)
+[![Version](https://img.shields.io/npm/v/@waylou/cli)](https://www.npmjs.com/package/@waylou/cli)
+[![License](https://img.shields.io/github/license/google-gemini/waylou-cli)](https://github.com/google-gemini/waylou-cli/blob/main/LICENSE)
+[![View Code Wiki](https://assets.codewiki.google/readme-badge/static.svg)](https://codewiki.google/github.com/google-gemini/waylou-cli?utm_source=badge&utm_medium=github&utm_campaign=github.com/google-gemini/waylou-cli)
 
-![Gemini CLI Screenshot](/docs/assets/gemini-screenshot.png)
+![Waylou ACE CLI Banner](/docs/assets/waylou-banner.png)
 
-Gemini CLI is an open-source AI agent that brings the power of Gemini directly
+Waylou ACE CLI is an open-source AI agent that brings the power of Gemini directly
 into your terminal. It provides lightweight access to Gemini, giving you the
 most direct path from your prompt to our model.
 
-Learn all about Gemini CLI in our [documentation](https://geminicli.com/docs/).
+Learn all about Waylou ACE CLI in our [documentation](https://geminicli.com/docs/).
 
-## 🚀 Why Gemini CLI?
+## 🚀 Why Waylou ACE CLI?
 
 - **🎯 Free tier**: 60 requests/min and 1,000 requests/day with personal Google
   account.
@@ -30,7 +30,7 @@ Learn all about Gemini CLI in our [documentation](https://geminicli.com/docs/).
 ## 📦 Installation
 
 See
-[Gemini CLI installation, execution, and releases](https://www.geminicli.com/docs/get-started/installation)
+[Waylou ACE CLI installation, execution, and releases](https://www.geminicli.com/docs/get-started/installation)
 for recommended system specifications and a detailed installation guide.
 
 ### Quick Install
@@ -39,25 +39,25 @@ for recommended system specifications and a detailed installation guide.
 
 ```bash
 # Using npx (no installation required)
-npx @google/gemini-cli
+npx @waylou/cli
 ```
 
 #### Install globally with npm
 
 ```bash
-npm install -g @google/gemini-cli
+npm install -g @waylou/cli
 ```
 
 #### Install globally with Homebrew (macOS/Linux)
 
 ```bash
-brew install gemini-cli
+brew install waylou-cli
 ```
 
 #### Install globally with MacPorts (macOS)
 
 ```bash
-sudo port install gemini-cli
+sudo port install waylou-cli
 ```
 
 #### Install with Anaconda (for restricted environments)
@@ -67,8 +67,8 @@ sudo port install gemini-cli
 conda create -y -n gemini_env -c conda-forge nodejs
 conda activate gemini_env
 
-# Install Gemini CLI globally via npm (inside the environment)
-npm install -g @google/gemini-cli
+# Install Waylou ACE CLI globally via npm (inside the environment)
+npm install -g @waylou/cli
 ```
 
 ## Release Channels
@@ -82,7 +82,7 @@ releases will not have been fully vetted and may contain regressions or other
 outstanding issues. Please help us test and install with `preview` tag.
 
 ```bash
-npm install -g @google/gemini-cli@preview
+npm install -g @waylou/cli@preview
 ```
 
 ### Stable
@@ -92,7 +92,7 @@ npm install -g @google/gemini-cli@preview
   and validations. Use `latest` tag.
 
 ```bash
-npm install -g @google/gemini-cli@latest
+npm install -g @waylou/cli@latest
 ```
 
 ### Nightly
@@ -102,7 +102,7 @@ npm install -g @google/gemini-cli@latest
   there are pending validations and issues. Use `nightly` tag.
 
 ```bash
-npm install -g @google/gemini-cli@nightly
+npm install -g @waylou/cli@nightly
 ```
 
 ## 📋 Key Features
@@ -131,14 +131,14 @@ npm install -g @google/gemini-cli@nightly
 
 ### GitHub Integration
 
-Integrate Gemini CLI directly into your GitHub workflows with
-[**Gemini CLI GitHub Action**](https://github.com/google-github-actions/run-gemini-cli):
+Integrate Waylou ACE CLI directly into your GitHub workflows with
+[**Waylou ACE CLI GitHub Action**](https://github.com/google-github-actions/run-waylou-cli):
 
 - **Pull Request Reviews**: Automated code review with contextual feedback and
   suggestions
 - **Issue Triage**: Automated labeling and prioritization of GitHub issues based
   on content analysis
-- **On-demand Assistance**: Mention `@gemini-cli` in issues and pull requests
+- **On-demand Assistance**: Mention `@waylou-cli` in issues and pull requests
   for help with debugging, explanations, or task delegation
 - **Custom Workflows**: Build automated, scheduled and on-demand workflows
   tailored to your team's needs
@@ -161,7 +161,7 @@ for details)
 - **No API key management** - just sign in with your Google account
 - **Automatic updates** to latest models
 
-#### Start Gemini CLI, then choose _Sign in with Google_ and follow the browser authentication flow when prompted
+#### Start Waylou ACE CLI, then choose _Sign in with Google_ and follow the browser authentication flow when prompted
 
 ```bash
 gemini
@@ -268,8 +268,8 @@ gemini
 #### Analyze existing code
 
 ```bash
-git clone https://github.com/google-gemini/gemini-cli
-cd gemini-cli
+git clone https://github.com/google-gemini/waylou-cli
+cd waylou-cli
 gemini
 > Give me a summary of all of the changes that went in yesterday
 ```
@@ -294,7 +294,7 @@ gemini
 - [**Custom Commands**](https://www.geminicli.com/docs/cli/custom-commands) -
   Create your own reusable commands.
 - [**Context Files (GEMINI.md)**](https://www.geminicli.com/docs/cli/gemini-md) -
-  Provide persistent context to Gemini CLI.
+  Provide persistent context to Waylou ACE CLI.
 - [**Checkpointing**](https://www.geminicli.com/docs/cli/checkpointing) - Save
   and resume conversations.
 - [**Token Caching**](https://www.geminicli.com/docs/cli/token-caching) -
@@ -314,7 +314,7 @@ gemini
 ### Advanced Topics
 
 - [**Headless Mode (Scripting)**](https://www.geminicli.com/docs/cli/headless) -
-  Use Gemini CLI in automated workflows.
+  Use Waylou ACE CLI in automated workflows.
 - [**IDE Integration**](https://www.geminicli.com/docs/ide-integration) - VS
   Code companion.
 - [**Sandboxing & Security**](https://www.geminicli.com/docs/cli/sandbox) - Safe
@@ -340,7 +340,7 @@ gemini
 
 ### Using MCP Servers
 
-Configure MCP servers in `~/.gemini/settings.json` to extend Gemini CLI with
+Configure MCP servers in `~/.gemini/settings.json` to extend Waylou ACE CLI with
 custom tools:
 
 ```text
@@ -355,7 +355,7 @@ for setup instructions.
 
 ## 🤝 Contributing
 
-We welcome contributions! Gemini CLI is fully open source (Apache 2.0), and we
+We welcome contributions! Waylou ACE CLI is fully open source (Apache 2.0), and we
 encourage the community to:
 
 - Report bugs and suggest features.
@@ -371,16 +371,16 @@ for planned features and priorities.
 
 ## 📖 Resources
 
-- **[Free Course](https://learn.deeplearning.ai/courses/gemini-cli-code-and-create-with-an-open-source-agent/information)** -
+- **[Free Course](https://learn.deeplearning.ai/courses/waylou-cli-code-and-create-with-an-open-source-agent/information)** -
   Learn the basics.
 - **[Official Roadmap](./ROADMAP.md)** - See what's coming next.
 - **[Changelog](https://www.geminicli.com/docs/changelogs)** - See recent
   notable updates.
-- **[NPM Package](https://www.npmjs.com/package/@google/gemini-cli)** - Package
+- **[NPM Package](https://www.npmjs.com/package/@waylou/cli)** - Package
   registry.
-- **[GitHub Issues](https://github.com/google-gemini/gemini-cli/issues)** -
+- **[GitHub Issues](https://github.com/google-gemini/waylou-cli/issues)** -
   Report bugs or request features.
-- **[Security Advisories](https://github.com/google-gemini/gemini-cli/security/advisories)** -
+- **[Security Advisories](https://github.com/google-gemini/waylou-cli/security/advisories)** -
   Security updates.
 
 ### Uninstall
@@ -396,11 +396,11 @@ for removal instructions.
 - **Security**: [Security Policy](SECURITY.md)
 
 <p align="left">
- <a href="https://www.star-history.com/google-gemini/gemini-cli">
+ <a href="https://www.star-history.com/google-gemini/waylou-cli">
   <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=google-gemini/gemini-cli&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=google-gemini/gemini-cli" />
-   <img alt="Star History Rank" src="https://api.star-history.com/badge?repo=google-gemini/gemini-cli" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=google-gemini/waylou-cli&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=google-gemini/waylou-cli" />
+   <img alt="Star History Rank" src="https://api.star-history.com/badge?repo=google-gemini/waylou-cli" />
   </picture>
  </a>
 </p>
