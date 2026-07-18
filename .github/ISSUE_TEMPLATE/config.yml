@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/helis-d/waylou#readme
+    about: Read the project documentation and FAQ before opening an issue.
+  - name: Security Policy
+    url: https://github.com/helis-d/waylou/blob/main/SECURITY.md
+    about: Report a security vulnerability.

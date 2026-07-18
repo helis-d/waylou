@@ -1,105 +1,216 @@
-# Waylou ACE CLI'ye Katkıda Bulunma
+# Contributing to Waylou ACE CLI
 
-Bu projeye katkıda bulunmak istediğiniz için teşekkür ederiz. Waylou ACE CLI,
-Google Gemini CLI projesinden fork'lanmış, açık kaynaklı bir projedir. Amacımız
-terminalde çalışan, çoklu AI sağlayıcısını destekleyen, güçlü ve kullanışlı bir
-kodlama asistanı oluşturmak.
+Thank you for your interest in contributing. This guide covers everything
+you need to get started.
 
-## Projenin Şu Anki Durumu
+## Project Status (Honest Assessment)
 
-Dürüst olalım: Bu proje henüz tam anlamıyla olgunlaşmamıştır. Fork sonrası
-aktif olarak üzerinde çalışıyoruz ve eksiklerimiz var.
+Waylou ACE CLI is a fork of Google Gemini CLI. We are actively developing
+it, and some areas are more mature than others.
 
-### En Büyük İhtiyaç: Provider Katmanı
+### Where We Need Help Most
 
-Şu anda projenin **en büyük geliştirme ihtiyacı provider katmanındadır**
-(`packages/provider`). Bu katman şunları yapar:
+**Provider layer** (`packages/provider`) — the biggest development need.
 
-- Birden fazla AI sağlayıcısına (Gemini, OpenAI, Anthropic, Ollama, DeepSeek) tek bir arayüzden erişim
-- Sağlayıcılar arası geçiş ve yük dengeleme
-- BYOK (Bring Your Own Key) modeli ile kullanıcının kendi API anahtarını kullanabilmesi
-- Takım orkestrasyonu (birden fazla sağlayıcıyı birlikte kullanarak iş bölümü)
+The provider layer handles:
+- Unified interface across multiple AI APIs
+- BYOK (Bring Your Own Key) authentication
+- Provider orchestration and model routing
 
-Bu katmandaki bilinen sorunlar ve yapılacak işler:
+Known gaps:
+- Test coverage is minimal
+- New provider integrations needed (Azure, AWS Bedrock, LM Studio, llama.cpp)
+- Streaming response stability varies by provider
+- Fallback mechanisms need improvement when a provider returns errors
 
-- **Test kapsamı yetersiz**: `byok.test.ts` ve `orchestrator.test.ts` var ancak henüz temel seviyede
-- **Yeni sağlayıcı entegrasyonları**: Yerel modeller (LM Studio, llama.cpp), bulut sağlayıcıları (Azure, Bedrock) için açık talepler var
-- **Streaming kararlılığı**: Bazı sağlayıcılarda streaming yanıtlarında tutarsızlıklar olabiliyor
-- **Hata yönetimi**: Sağlayıcı hatalarında daha iyi geri düşme (fallback) mekanizmaları gerekli
+If you have experience with AI APIs, SDKs, or provider integrations, **you
+are exactly who we need**.
 
-Eğer AI API'leri, SDK'lar veya provider entegrasyonları konusunda deneyiminiz varsa,
-**tam olarak aradığımız kişisiniz**.
+### CLI Layer
 
-### CLI Katmanı
+The CLI (`packages/cli`) works but is **open for new features**:
+- New slash commands (`/explain`, `/fix`, `/refactor`)
+- Theme system enhancements
+- Multi-session management
+- Better error messages and user feedback
 
-CLI katmanı (`packages/cli`) çalışır durumda ancak **yeni özelliklere açık**.
-Özellikle şunlara ihtiyacımız var:
+We want the CLI to be feature-rich. Creative ideas are welcome.
 
-- Yeni slash komutları (`/explain`, `/fix`, `/refactor` gibi)
-- Tema ve kişiselleştirme seçenekleri
-- Çoklu oturum yönetimi
-- Daha iyi hata mesajları ve kullanıcı geri bildirimi
+### Other Areas
 
-CLI'ı olabildiğince zengin özelliklerle donatmak istiyoruz. Yaratıcı fikirleriniz
-varsa lütfen paylaşmaktan çekinmeyin.
+- **Documentation**: Getting started guides, API references, examples
+- **Testing**: Unit tests, integration tests, eval suite
+- **ACE Specification**: Refining CORE, STANDARD, ENTERPRISE levels
 
-### Diğer Alanlar
+## Development Setup
 
-- **Dokümantasyon**: README, kurulum rehberleri, kullanım örnekleri
-- **Test**: Birim testleri, entegrasyon testleri
-- **ACE Spesifikasyonu**: CORE, STANDARD ve ENTERPRISE seviyelerinin tanımlanması ve validasyonu
+### Prerequisites
+- Node.js 20.19.0 or later
+- npm 9 or later
 
-## Geliştirme Ortamı Kurulumu
+### Getting Started
 
 ```bash
-# Repoyu klonla
+# Clone the repository
 git clone https://github.com/helis-d/waylou.git
 cd waylou
 
-# Bağımlılıkları yükle (Node.js ~20.19.0 gerekli)
+# Install dependencies
 npm install
 
-# Projeyi derle
+# Build all packages
 npm run build
 
-# Geliştirme modunda çalıştır
+# Run in development mode
 node run.js
 ```
 
-## Katkı Süreci
+### Useful Commands
 
-1. Önce bir **issue açın** ve ne yapmak istediğinizi anlatın. Böylece boşa emek harcamamış oluruz.
-2. Repoyu fork'layın ve yeni bir branch oluşturun.
-3. Değişikliklerinizi yapın.
-4. Testleri çalıştırın: `npm test`
-5. PR (Pull Request) gönderin.
+| Command | Description |
+|---------|-------------|
+| `npm run build` | Build all packages |
+| `npm test` | Run all tests |
+| `npm run lint` | Run ESLint and Prettier checks |
+| `npm run typecheck` | Run TypeScript type checking |
+| `node run.js` | Start the CLI in development mode |
 
-### Commit Mesajları
+## Repository Workflow
 
-Anlamlı ve açıklayıcı commit mesajları yazın. Örnek:
+### Branch Strategy
+
+| Branch | Purpose |
+|--------|---------|
+| `main` | Production branch. Always deployable. |
+| `develop` | Integration branch for features. |
+| `feature/*` | New features. Branch from `develop`. |
+| `fix/*` | Bug fixes. Branch from `main`. |
+| `release/*` | Release preparation. Branch from `develop`. |
+| `hotfix/*` | Critical production fixes. Branch from `main`. |
+| `docs/*` | Documentation-only changes. |
+
+### Conventional Commits
+
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
-feat(provider): Anthropic provider'a streaming desteği eklendi
-fix(cli): headless modda çökme sorunu giderildi
-docs: kurulum rehberi güncellendi
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
 ```
 
-## Kod Standartları
+**Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`,
+`build`, `ci`, `chore`, `revert`
 
-- TypeScript kullanın, tip güvenliğine dikkat edin
-- Yeni özellikler için test yazın
-- Prettier ve ESLint kurallarına uyun (`npm run lint`)
-- Büyük değişiklikleri küçük PR'lara bölün
+**Scopes:** `cli`, `core`, `provider`, `ace-spec`, `autonomous-engine`,
+`context-engine`, `sandbox`, `sdk`, `docs`, `ci`, `deps`
 
-## Çalışma Şeklimiz
+**Examples:**
+```
+feat(provider): add Anthropic streaming support
+fix(cli): resolve crash in headless mode on Windows
+docs(readme): update installation instructions
+test(provider): add unit tests for orchestrator
+refactor(core): simplify token counting logic
+ci: add multi-platform build workflow
+```
 
-Bu proje tek kişi tarafından yönetiliyor ancak açık kaynak topluluğunun katkılarına
-tamamen açık. Hiyerarşik bir yapımız yok — iyi fikir her yerden gelebilir.
+### Pull Request Process
 
-İletişim için GitHub Issues'u kullanın. Mümkün olduğunca şeffaf ve açık
-iletişim kurmaya çalışıyoruz.
+1. **Open an issue first** — Describe what you want to change. This prevents
+   wasted effort.
+2. **Fork the repository** and create a feature branch.
+3. **Make your changes** — Keep PRs focused and reasonably sized.
+4. **Add tests** — New features must include tests.
+5. **Run the full suite**: `npm run lint && npm test`
+6. **Submit a PR** against the `develop` branch.
+7. **Respond to review feedback** — Be open to suggestions.
 
-## Lisans
+### PR Requirements
 
-Bu projeye yaptığınız katkılar Apache License 2.0 altında lisanslanacaktır.
-Katkıda bulunarak bu şartları kabul etmiş olursunuz.
+- [ ] Follows [Conventional Commits](./CONTRIBUTING.md#conventional-commits)
+- [ ] Includes tests for new functionality
+- [ ] Updates documentation if needed
+- [ ] Passes `npm run lint` with no errors
+- [ ] Passes `npm test` with no failures
+- [ ] Describes what the change does and why
+
+## Code Standards
+
+### TypeScript
+- Use strict TypeScript. Avoid `any` — use `unknown` or proper types.
+- Prefer `interface` over `type` for object shapes.
+- Export types alongside implementations.
+
+### Formatting
+We use **Prettier** and **ESLint**. Formatting is enforced via a pre-commit
+hook (Husky + lint-staged). Run manually with:
+
+```bash
+npm run lint
+```
+
+Key rules:
+- 2-space indentation
+- Single quotes
+- Trailing commas in multi-line expressions
+- Maximum 80 characters per line
+- Semicolons required
+
+### Naming Conventions
+- **Files**: `kebab-case.ts` for modules, `PascalCase.tsx` for React components
+- **Variables & functions**: `camelCase`
+- **Classes & interfaces**: `PascalCase`
+- **Constants**: `UPPER_SNAKE_CASE`
+- **Types**: `PascalCase`, prefixed with `T` only if disambiguation needed
+
+### Testing
+- Use **Vitest** for all tests.
+- Test files live next to their source: `foo.test.ts` alongside `foo.ts`.
+- Aim for meaningful coverage — test behavior, not implementation.
+- Run specific tests: `npx vitest path/to/test.test.ts`
+
+## Issue Guidelines
+
+### Bug Reports
+Use the [Bug Report template](https://github.com/helis-d/waylou/issues/new?template=bug_report.yml).
+Include:
+- Steps to reproduce
+- Expected vs actual behavior
+- Environment details (OS, Node version, provider)
+
+### Feature Requests
+Use the [Feature Request template](https://github.com/helis-d/waylou/issues/new?template=feature_request.yml).
+Describe:
+- The problem you're trying to solve
+- Your proposed solution
+- Alternatives you've considered
+
+## Release Process
+
+Releases follow [Semantic Versioning](https://semver.org/).
+
+| Channel | Frequency | Stability |
+|---------|-----------|-----------|
+| Nightly | Daily at 00:00 UTC | Experimental |
+| Preview | Weekly on Tuesday 23:59 UTC | Pre-release |
+| Stable | Weekly on Tuesday 20:00 UTC | Production |
+
+The release workflow is automated via GitHub Actions. See
+`.github/workflows/release-*.yml` for details.
+
+## Code Review
+
+All PRs require at least one review before merging. Reviewers look for:
+- Correctness and edge-case handling
+- Test coverage
+- Code style and readability
+- Performance implications
+- Security considerations
+
+## License
+
+By contributing, you agree that your contributions will be licensed under
+the Apache License 2.0. See [LICENSE](./LICENSE) for the full text.

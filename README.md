@@ -1,33 +1,113 @@
-# Waylou ACE CLI
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="/docs/assets/waylou-banner.png">
+    <img alt="Waylou ACE CLI Banner" src="/docs/assets/waylou-banner.png" width="800">
+  </picture>
+</p>
 
-![Waylou ACE CLI Banner](/docs/assets/waylou-banner.png)
+<p align="center">
+  <strong>Your terminal. Your models. Your rules.</strong>
+</p>
 
-Waylou ACE CLI, terminalinizden çalışan açık kaynaklı bir AI kodlama asistanıdır.
-Google Gemini CLI projesinden fork'lanmıştır ve çoklu AI sağlayıcı desteği,
-otonom ajan yetenekleri ve genişletilebilir mimarisiyle farklılaşır.
+<p align="center">
+  <a href="https://github.com/helis-d/waylou/actions"><img alt="CI" src="https://github.com/helis-d/waylou/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://www.npmjs.com/package/@waylou/cli"><img alt="npm version" src="https://img.shields.io/npm/v/@waylou/cli"></a>
+  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/github/license/helis-d/waylou"></a>
+  <a href="https://github.com/helis-d/waylou"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/helis-d/waylou"></a>
+</p>
 
-> ⚠️ **Durum:** Bu proje aktif geliştirme aşamasındadır. Temel işlevsellik
-> çalışır durumdadır ancak bazı özellikler henüz tamamlanmamıştır. Katkılarınız
-> beklenir.
+---
 
-## Neden Waylou ACE CLI?
+**Waylou ACE CLI** is an open-source AI coding assistant that runs directly
+in your terminal. It connects to multiple AI models — Gemini, OpenAI,
+Anthropic, Ollama, DeepSeek — through a single, unified interface.
 
-- **Çoklu AI desteği**: Gemini, OpenAI, Anthropic, Ollama, DeepSeek — tek bir arayüzden hepsine erişin
-- **Terminal öncelikli**: Kodla yaşayan geliştiriciler için tasarlandı
-- **Otonom & interaktif**: Hem sohbet modunda hem de headless/otonom modda çalışır
-- **ACE Spesifikasyonu**: CORE, STANDARD ve ENTERPRISE uyumluluk seviyeleriyle standartlaştırılmış ajan davranışı
-- **MCP desteği**: Model Context Protocol ile özel entegrasyonlar
-- **Açık kaynak**: Apache 2.0 lisanslı
+Forked from Google Gemini CLI, Waylou extends the foundation with
+multi-provider support, autonomous operation, and an architecture designed
+for extensibility.
 
-## Kurulum
+> **Status:** Active development. Core functionality works. Provider layer
+> and CLI features are under heavy development. Contributions welcome.
 
-### Hızlı kurulum (npm)
+## Why Waylou?
+
+| Capability | Waylou ACE CLI | Gemini CLI |
+|------------|:---:|:---:|
+| Multi-provider (Gemini, OpenAI, Claude, local) | ✅ | ❌ |
+| BYOK — Bring Your Own Key | ✅ | ❌ |
+| Provider orchestration & team routing | ✅ | ❌ |
+| Headless / autonomous mode | ✅ | ✅ |
+| MCP (Model Context Protocol) | ✅ | ✅ |
+| ACE compliance specification | ✅ | ❌ |
+| VS Code companion | ✅ | ❌ |
+| Apache 2.0 open source | ✅ | ✅ |
+
+## Quick Start
+
+```bash
+# Install globally
+npm install -g @waylou/cli
+
+# Or run instantly
+npx @waylou/cli
+
+# Launch
+waylou
+```
+
+## Features
+
+### Multi-Provider AI
+Use any model, any provider. Swap mid-session. Route tasks to the right
+model based on capability, speed, or cost.
+
+**Supported providers:**
+- **Google Gemini** — Gemini 2.5, 3.0 (1M token context)
+- **OpenAI** — GPT-4, GPT-4o
+- **Anthropic** — Claude 3.5, Claude 4
+- **Ollama** — Local models (Llama, Mistral, Gemma)
+- **DeepSeek** — DeepSeek V3, R1
+
+### Provider Orchestration
+Form teams of models with different roles — architect, coder, reviewer.
+The orchestrator distributes tasks using configurable strategies
+(capability-best, round-robin, parallel-vote).
+
+### ACE Specification
+The **Agentic Coding Environment** specification standardizes agent
+behavior across three compliance levels:
+
+- **CORE** — File operations, shell commands, web fetch
+- **STANDARD** — MCP integration, checkpointing, sandbox, memory
+- **ENTERPRISE** — Policy engine, audit logging, team orchestration
+
+### Headless & Autonomous
+Run in CI/CD pipelines, scripts, and automated workflows:
+
+```bash
+waylou -p "Review this PR and summarize the changes" --output-format json
+```
+
+### Context Engine
+Semantic code search combining vector embeddings (SQLite-vec) with AST
+analysis (Tree-sitter) for precise, relevant context retrieval.
+
+### Sandbox
+Secure execution via macOS Seatbelt, Docker, or Podman.
+
+## Installation
+
+### Prerequisites
+- Node.js 20+
+- npm 9+
+
+### Quick Install
 
 ```bash
 npm install -g @waylou/cli
 ```
 
-### Geliştirme kurulumu (kaynaktan)
+### From Source
 
 ```bash
 git clone https://github.com/helis-d/waylou.git
@@ -37,74 +117,89 @@ npm run build
 node run.js
 ```
 
-## Kullanım
+## Configuration
+
+Set your provider API keys:
 
 ```bash
-# İnteraktif mod
-waylou
+export GEMINI_API_KEY="your-key"      # Google Gemini
+export OPENAI_API_KEY="your-key"      # OpenAI
+export ANTHROPIC_API_KEY="your-key"   # Anthropic
+export DEEPSEEK_API_KEY="your-key"    # DeepSeek
+```
 
-# Headless mod (script'ler için)
-waylou -p "Bu kod tabanını açıkla"
+For local models, install [Ollama](https://ollama.com) and run:
 
-# Belirli bir sağlayıcı ile
+```bash
 waylou --provider ollama
 ```
 
-## Mimari
+## Architecture
 
-Waylou ACE CLI, monorepo yapısında birkaç ana paketten oluşur:
+```
+CLI (Ink/React UI)
+    │
+    ▼
+Core Engine (Agent Loop, Tools, Prompts)
+    │
+    ▼
+Provider Layer (Gemini | OpenAI | Anthropic | Ollama | DeepSeek)
+    │
+    ▼
+AI APIs
+```
 
-| Paket | Açıklama |
-|-------|----------|
-| `cli` | Terminal UI (Ink/React tabanlı) ve komut satırı arayüzü |
-| `core` | Temel ajan mantığı, prompt yönetimi, tool sistemi |
-| `provider` | Çoklu AI sağlayıcı katmanı (Gemini, OpenAI, Anthropic, Ollama, DeepSeek) |
-| `ace-spec` | Agentic Coding Environment spesifikasyon ve validasyon |
-| `autonomous-engine` | Otonom/headless çalışma motoru |
-| `context-engine` | Vektör ve AST tabanlı semantik kod arama |
-| `sandbox` | Güvenli çalıştırma ortamı |
-| `sdk` | Harici entegrasyonlar için SDK |
-| `vscode-ide-companion` | VS Code eklentisi |
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for the full system design.
 
-## Sağlayıcılar (Providers)
+## Packages
 
-Şu anda desteklenen AI sağlayıcıları:
+| Package | Description |
+|---------|-------------|
+| `@waylou/cli` | Terminal UI & CLI binary |
+| `@waylou/cli-core` | Core agent logic, tools, prompts |
+| `@waylou/cli-provider` | Multi-AI provider abstraction |
+| `@waylou/ace-spec` | ACE specification & validation |
+| `@waylou/autonomous-engine` | Headless / autonomous operation |
+| `@waylou/context-engine` | Vector & AST semantic search |
+| `@waylou/sandbox` | Secure execution environment |
+| `@waylou/cli-sdk` | Public SDK for extensions |
 
-- **Google Gemini** (varsayılan)
-- **OpenAI** (GPT serisi)
-- **Anthropic** (Claude serisi)
-- **Ollama** (yerel modeller)
-- **DeepSeek**
+## Documentation
 
-> Provider katmanı projenin en aktif geliştirilen kısmıdır. Yeni sağlayıcı
-> eklemek için [CONTRIBUTING.md](./CONTRIBUTING.md) dosyasına bakın.
+- [Architecture](./ARCHITECTURE.md)
+- [Project Structure](./PROJECT_STRUCTURE.md)
+- [FAQ](./FAQ.md)
+- [Changelog](./CHANGELOG.md)
+- [Roadmap](./ROADMAP.md)
+- [Contributing](./CONTRIBUTING.md)
+- [Security](./SECURITY.md)
+- [Support](./SUPPORT.md)
 
-## ACE Spesifikasyonu
+## Roadmap
 
-Waylou ACE CLI, standartlaştırılmış ajan davranışı için ACE (Agentic Coding
-Environment) spesifikasyonunu uygular. Üç uyumluluk seviyesi vardır:
+See [ROADMAP.md](./ROADMAP.md) for planned features and priorities.
 
-- **CORE**: Temel ajan yetenekleri — dosya işlemleri, shell komutları, web fetch
-- **STANDARD**: Gelişmiş yetenekler — MCP entegrasyonu, checkpointing, sandbox
-- **ENTERPRISE**: Kurumsal özellikler — politika motoru, audit logging, takım orkestrasyonu
+## Contributing
 
-## Katkıda Bulunma
+Contributions are welcome — especially for the **provider layer**, which is
+the project's biggest development need. If you have experience with AI APIs,
+SDKs, or model integrations, we'd love your help.
 
-Bu proje açık kaynaklıdır ve katkılara açıktır. Özellikle şu alanlarda yardıma
-ihtiyacımız var:
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full guide.
 
-- **Provider katmanı**: En büyük geliştirme ihtiyacı burada. Yeni AI sağlayıcıları entegre etmek, mevcut olanları iyileştirmek.
-- **CLI özellikleri**: Yeni komutlar, UI iyileştirmeleri, kullanıcı deneyimi
-- **Dokümantasyon**: Daha iyi rehberler ve örnekler
-- **Test**: Test kapsamını artırmak
+## Community
 
-Detaylar için [CONTRIBUTING.md](./CONTRIBUTING.md) dosyasına bakın.
+- [GitHub Issues](https://github.com/helis-d/waylou/issues)
+- [GitHub Discussions](https://github.com/helis-d/waylou/discussions)
+- Read the [Code of Conduct](./CODE_OF_CONDUCT.md)
 
-## Lisans
+## Acknowledgments
 
-Apache License 2.0 — Detaylar için [LICENSE](./LICENSE) dosyasına bakın.
+This project is forked from
+[Google Gemini CLI](https://github.com/google-gemini/gemini-cli). We are
+grateful to the original authors and contributors for building an
+exceptional foundation.
 
-## Teşekkür
+## License
 
-Bu proje [Google Gemini CLI](https://github.com/google-gemini/gemini-cli)
-projesinden fork'lanmıştır. Orijinal projeye ve emeği geçen herkese teşekkür ederiz.
+Apache License 2.0 — See [LICENSE](./LICENSE) for details.
